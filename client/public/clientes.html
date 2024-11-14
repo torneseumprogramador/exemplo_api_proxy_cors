@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lista de Clientes</title>
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+  <div class="container mt-5">
+    <h2 class="text-center">Lista de Clientes</h2>
+    <table class="table table-bordered table-striped mt-3">
+      <thead class="thead-dark">
+        <tr>
+          <th>Nome</th>
+          <th>Telefone</th>
+        </tr>
+      </thead>
+      <tbody id="clientes-tabela">
+        <!-- Dados dos clientes serão inseridos aqui -->
+      </tbody>
+    </table>
+  </div>
+
+  <script>
+    // Função para buscar e exibir a lista de clientes
+    async function carregarClientes() {
+      try {
+        const response = await fetch('http://localhost:3002/clientes');
+        if (!response.ok) {
+          throw new Error('Erro ao buscar dados');
+        }
+        const clientes = await response.json();
+
+        // Seleciona o elemento <tbody> onde os dados serão inseridos
+        const tabelaClientes = document.getElementById('clientes-tabela');
+        tabelaClientes.innerHTML = ''; // Limpa o conteúdo existente
+
+        // Adiciona uma linha na tabela para cada cliente
+        clientes.forEach(cliente => {
+          const row = document.createElement('tr');
+          row.innerHTML = `
+            <td>${cliente.nome}</td>
+            <td>${cliente.telefone}</td>
+          `;
+          tabelaClientes.appendChild(row);
+        });
+      } catch (error) {
+        console.error('Erro:', error);
+      }
+    }
+
+    // Carrega a lista de clientes ao carregar a página
+    window.onload = carregarClientes;
+  </script>
+</body>
+</html>

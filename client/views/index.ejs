@@ -1,0 +1,31 @@
+<!-- views/clientes.ejs -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= title %></title>
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+  <div class="container mt-5">
+    <h2 class="text-center"><%= title %></h2>
+    <table class="table table-bordered table-striped mt-3">
+      <thead class="thead-dark">
+        <tr>
+          <th>Nome</th>
+          <th>Telefone</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% clientes.forEach(cliente => { %>
+          <tr>
+            <td><%= cliente.nome %></td>
+            <td><%= cliente.telefone %></td>
+          </tr>
+        <% }); %>
+      </tbody>
+    </table>
+  </div>
+</body>
+</html>
